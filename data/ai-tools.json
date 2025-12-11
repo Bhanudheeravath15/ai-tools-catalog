@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "name": "WriteMatic",
+    "category": "Writing",
+    "pricing": "Freemium",
+    "website": "https://writematic.example",
+    "logo": "/logos/writematic.svg",
+    "short_description": "AI writing assistant for blog posts and marketing copy.",
+    "features": ["SEO suggestions", "Templates", "Long-form writing"],
+    "tags": ["writing", "seo", "content"],
+    "launch_year": 2022
+  },
+  {
+    "id": "2",
+    "name": "VisuGen",
+    "category": "Image",
+    "pricing": "Paid",
+    "website": "https://visugen.example",
+    "logo": "/logos/visugen.svg",
+    "short_description": "Generates marketing images using text prompts.",
+    "features": ["HD output", "Styles", "API access"],
+    "tags": ["image", "ai", "generation"],
+    "launch_year": 2023
+  }
+]
