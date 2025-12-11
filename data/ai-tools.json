@@ -4,8 +4,8 @@
     "name": "WriteMatic",
     "category": "Writing",
     "pricing": "Freemium",
-    "website": "https://example.com",
-    "logo": "/logos/writematic.svg",
+    "website": "https://www.jasper.ai/",
+    "logo": "/logos/writematic.png",
     "short_description": "AI writing assistant for blog posts and marketing copy.",
     "features": ["SEO suggestions", "Templates", "Long-form writing"],
     "tags": ["writing", "seo", "content"],
@@ -16,11 +16,35 @@
     "name": "VisuGen",
     "category": "Image",
     "pricing": "Paid",
-    "website": "https://example.com",
-    "logo": "/logos/visugen.svg",
+    "website": "https://www.midjourney.com/",
+    "logo": "/logos/visugen.png",
     "short_description": "Generates marketing images using text prompts.",
     "features": ["HD output", "Styles", "API access"],
     "tags": ["image", "ai", "generation"],
     "launch_year": 2023
+  },
+  {
+    "id": "3",
+    "name": "CodePilot",
+    "category": "Coding",
+    "pricing": "Freemium",
+    "website": "https://codeium.com/",
+    "logo": "/logos/codepilot.png",
+    "short_description": "AI-powered coding assistant for developers.",
+    "features": ["Autocompletion", "Bug fixes", "Refactoring"],
+    "tags": ["coding", "developer", "autocomplete"],
+    "launch_year": 2023
+  },
+  {
+    "id": "4",
+    "name": "ChatVision",
+    "category": "Chatbot",
+    "pricing": "Free",
+    "website": "https://chat.openai.com/",
+    "logo": "/logos/chatvision.png",
+    "short_description": "Conversational chatbot powered by advanced AI.",
+    "features": ["Memory", "Reasoning", "Web browsing"],
+    "tags": ["chatbot", "assistant"],
+    "launch_year": 2024
   }
 ]
