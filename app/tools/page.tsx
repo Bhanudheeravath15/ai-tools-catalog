@@ -1,7 +1,7 @@
+
 import fs from "fs";
 import path from "path";
-import ToolCard from "../../components/ToolCard";
-import ClientSearch from "../../components/ClientSearch";
+import ClientSearchContainer from "../../components/ClientSearchContainer";
 
 export default function ToolsPage() {
   const dataPath = path.join(process.cwd(), "data/ai-tools.json");
@@ -9,17 +9,20 @@ export default function ToolsPage() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-4">All AI Tools</h1>
+      <h1 className="text-3xl font-bold mb-6">All AI Tools</h1>
 
-      {/* ClientSearch is a client component (it has "use client") so importing it
-          directly from a server component is allowed — Next will hydrate it on the client */}
-      <ClientSearch tools={tools} />
+      <ClientSearchContainer tools={tools} />
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+      <h2 className="text-xl font-semibold mt-10 mb-4">All Tools</h2>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {tools.map((tool: any) => (
-          <ToolCard key={tool.id} tool={tool} />
+          <div key={tool.id} className="border rounded p-3">
+            <a href={`/tools/${tool.id}`} className="text-lg font-medium text-sky-600">{tool.name}</a>
+            <p className="text-sm text-slate-600">{tool.category} • {tool.pricing}</p>
+          </div>
         ))}
       </div>
     </div>
   );
 }
+
