@@ -1,4 +1,3 @@
-
 "use client";
 import { useState, useMemo } from "react";
 import ToolCard from "./ToolCard";
@@ -17,7 +16,7 @@ export default function ClientSearch({ tools }: { tools: any[] }) {
     if (query.trim()) {
       const q = query.toLowerCase();
       data = data.filter(t =>
-        t.name.toLowerCase().includes(q) ||
+        (t.name || "").toLowerCase().includes(q) ||
         (t.short_description || "").toLowerCase().includes(q) ||
         (t.tags || []).join(" ").toLowerCase().includes(q)
       );
@@ -32,13 +31,7 @@ export default function ClientSearch({ tools }: { tools: any[] }) {
   return (
     <div>
       <div className="flex flex-col md:flex-row gap-3 mb-6">
-        <input
-          aria-label="Search"
-          placeholder="Search tools, tags or description..."
-          value={query}
-          onChange={e=>setQuery(e.target.value)}
-          className="border rounded px-3 py-2 flex-1"
-        />
+        <input aria-label="Search" placeholder="Search..." className="border rounded px-3 py-2 flex-1" value={query} onChange={e=>setQuery(e.target.value)} />
         <select className="border rounded px-2 py-2" value={category} onChange={e=>setCategory(e.target.value)}>
           {categories.map(c => <option key={c} value={c}>{c}</option>)}
         </select>
@@ -59,5 +52,4 @@ export default function ClientSearch({ tools }: { tools: any[] }) {
     </div>
   );
 }
-
 

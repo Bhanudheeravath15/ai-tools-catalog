@@ -1,43 +1,63 @@
+// app/tools/[id]/page.tsx
 import fs from "fs";
 import path from "path";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
-export async function generateStaticParams() {
-  const dataPath = path.join(process.cwd(), "data/ai-tools.json");
-  const tools = JSON.parse(fs.readFileSync(dataPath, "utf8"));
-  return tools.map((t: any) => ({ id: t.id }));
+interface Tool {
+  id: string | number;
+  name: string;
+  category: string;
+  pricing: string;
+  short_description?: string;
+  website?: string;
+  logo?: string;
+  features?: string[];
 }
 
-export default async function ToolDetail({ params }: any) {
-  // params may be a Promise in Next 16 — await it
-  const p = await params;
-  const id = p?.id;
+export default async function ToolDetailPage({ params }: { params: Promise<{ id: string }> | { id: string } }) {
+  // params is a Promise in Next 16 — unwrap it
+  const { id } = await params;
 
   const dataPath = path.join(process.cwd(), "data/ai-tools.json");
-  const tools = JSON.parse(fs.readFileSync(dataPath, "utf8"));
-  const tool = tools.find((t: any) => t.id === id);
+  const tools: Tool[] = JSON.parse(fs.readFileSync(dataPath, "utf8"));
 
-  if (!tool) return notFound();
+  const tool = tools.find((t) => String(t.id) === String(id));
+
+  // return 404 page if no matching tool
+  if (!tool) {
+    notFound();
+  }
 
   return (
     <div>
-      <h1 className="text-3xl font-bold">{tool.name}</h1>
-      <p className="text-slate-600">{tool.category} • {tool.pricing}</p>
+      <Link href="/tools" className="text-sm text-sky-600">← Back</Link>
 
-      <img src={tool.logo} alt={tool.name} className="w-40 h-40 mt-4 rounded" />
+      <h1 className="text-3xl font-bold mt-6">{tool!.name}</h1>
+      <div className="text-sm text-slate-600 mb-4">
+        {tool!.category} • {tool!.pricing}
+      </div>
 
-      <p className="mt-4">{tool.short_description}</p>
+      {tool!.logo && <img src={tool!.logo} alt={tool!.name} className="w-48 h-48 object-cover rounded mb-4" />}
 
-      <h3 className="text-xl font-semibold mt-6 mb-2">Features</h3>
-      <ul className="list-disc pl-6">
-        {tool.features?.map((f: string, i: number) => (
-          <li key={i}>{f}</li>
-        ))}
-      </ul>
+      <p className="text-base text-slate-700 mb-4">{tool!.short_description}</p>
 
-      <a href={tool.website} target="_blank" rel="noreferrer" className="text-sky-600 mt-4 inline-block">
-        Visit Website →
-      </a>
+      {tool!.features?.length ? (
+        <div>
+          <h3 className="font-semibold">Features</h3>
+          <ul className="list-disc ml-6">
+            {tool!.features.map((f, i) => <li key={i}>{f}</li>)}
+          </ul>
+        </div>
+      ) : null}
+
+      {tool!.website ? (
+        <p className="mt-4">
+          <a href={tool!.website} target="_blank" rel="noreferrer" className="text-sky-600 hover:underline">
+            Visit Website →
+          </a>
+        </p>
+      ) : null}
     </div>
   );
 }

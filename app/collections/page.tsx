@@ -1,23 +1,23 @@
 import Link from "next/link";
 
-export default function CollectionsPage() {
+export default function CollectionsIndex() {
   const collections = [
-    { id: "free", title: "Best Free Tools", description: "Free AI tools worth trying" },
-    { id: "image", title: "Top Image Generators", description: "Image-focused AI tools" }
+    { id: "free", title: "Free & Freemium Tools" },
+    { id: "writing", title: "Writing Tools" },
+    { id: "image", title: "Image Tools" }
   ];
 
   return (
     <div>
       <h1 className="text-3xl font-bold mb-4">Collections</h1>
-      <div className="grid md:grid-cols-2 gap-4">
-        {collections.map(c => (
-          <div key={c.id} className="border rounded p-4">
-            <h3 className="text-xl font-semibold">{c.title}</h3>
-            <p className="text-slate-600">{c.description}</p>
-            <Link href={`/collections/${c.id}`} className="text-sky-600 inline-block mt-3">View →</Link>
-          </div>
+      <ul className="space-y-3">
+        {collections.map(c=>(
+          <li key={c.id}>
+            <Link href={`/collections/${c.id}`} className="text-sky-600">{c.title}</Link>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }
+
